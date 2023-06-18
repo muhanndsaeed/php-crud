@@ -65,7 +65,7 @@ $data = mysqli_query($con,"SELECT * FROM courses WHERE stdid = $id");
 
 
                         <td class="px-6 py-4"><a
-                                href="deletecourse.php?stdid=<?php echo $row['stdid']?>&id=<?php echo $row['id']?>"><i
+                                href="deletecourse.php?stdid=<?php echo $row['stdid']?>&courseid=<?php echo $row['id']?>"><i
                                     class="fa-sharp fa-solid fa-trash"></i></a>
                         </td>
 
