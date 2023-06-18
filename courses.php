@@ -1,11 +1,13 @@
-<?php 
+<?php
+
 require_once("db.php");
+$id = $_GET["id"];
+$data = mysqli_query($con,"SELECT * FROM courses WHERE stdid = $id");
 
-$data = mysqli_query($con,"SELECT * FROM students");
 
-// $row = mysqli_fetch_assoc($data);
+
+
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,15 +15,21 @@ $data = mysqli_query($con,"SELECT * FROM students");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Students</title>
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="data.php">Students</a>
+        </div>
+    </nav>
+
     <div class="container w-full mb-5">
         <?php
     if (isset($_GET["msg"])) {
@@ -37,12 +45,10 @@ $data = mysqli_query($con,"SELECT * FROM students");
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" class="px-6 py-3">#</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">Age</th>
-                        <th scope="col" class="px-6 py-3">Edit</th>
+                        <th scope="col" class="px-6 py-3">Name of Course</th>
+                        <th scope="col" class="px-6 py-3">Semester</th>
                         <th scope="col" class="px-6 py-3">Delete</th>
-                        <th scope="col" class="px-6 py-3">Courses</th>
+
                     </tr>
                 </thead>
 
@@ -54,17 +60,15 @@ $data = mysqli_query($con,"SELECT * FROM students");
 
                         <th scope="row" class="px-6 py-4 ">
                             <?php echo $row['id'];?></th>
-                        <td class="px-6 py-4"> <?php echo $row['name'];?></td>
-                        <td class="px-6 py-4"> <?php echo $row['email'];?></td>
-                        <td class="px-6 py-4"> <?php echo $row['age'];?></td>
-                        <td class="px-6 py-4"><a href="edit.php?id=<?php echo $row['id']?>"><i
-                                    class="fa-solid fa-pen"></i></a></td>
-                        <td class="px-6 py-4"><a href="delete.php?id=<?php echo $row['id']?>"><i
+                        <td class="px-6 py-4"> <?php echo $row['coursename'];?></td>
+                        <td class="px-6 py-4"> <?php echo $row['semester'];?></td>
+
+
+                        <td class="px-6 py-4"><a
+                                href="deletecourse.php?stdid=<?php echo $row['stdid']?>&id=<?php echo $row['id']?>"><i
                                     class="fa-sharp fa-solid fa-trash"></i></a>
                         </td>
-                        <td class="px-6 py-4"><a href="courses.php?id=<?php echo $row['id']?>"><i
-                                    class="fa-solid fa-eye"></i></a>
-                        </td>
+
 
                     </tr>
 
@@ -74,10 +78,9 @@ $data = mysqli_query($con,"SELECT * FROM students");
 
             </table>
 
-            <a href="index.php" class="btn btn-secondary">Add Student</a>
+
         </div>
-        <a href="index.php" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">Add
-            Student</a>
+        <a class="btn btn-secondary" href="addcourse.php?id=<?php echo $id?>"> Add course</a>
     </div>
     <!-- <script src="https://cdn.tailwindcss.com"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -89,6 +92,7 @@ $data = mysqli_query($con,"SELECT * FROM students");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
     </script>
+
 </body>
 
 </html>

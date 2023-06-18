@@ -28,7 +28,7 @@ if(isset($_POST["submit"])){
 </head>
 
 <body>
-    <form action="" method="post">
+    <form class="form-group" action="" method="post">
         <input type="text" name="name" id="">
         <br />
         <input type="text" name="email" id="">
